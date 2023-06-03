@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "amiami-387915",
+  "private_key_id": "fe3d320cb08c00e78828d88e0ec48b31d0d49839",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCjKeY9dDOC7EyA\n80IjcUkTz7TMlPTtimiM0wpavX5vDIG1lHRtsT+aZgBo8ptnh4daDrAf5UByMy4L\nhMrzqyquTQAV1BiyTvaYxZTldF1y8M5KmJBbc9qGK5mZmBUFBU9mjW+CQrX2BB2P\nDSH+13Q6Qd3Im5As9OY/R3eDYuB9q+TjdCAtmuwH2aAQGZv8Bx4xVNnDYvGqvZeO\nQcoIw0xBkDPJhfoJkeewZK6vgNWEaj1yY4nKcaKvfQgjdTTuLqAFNPWx0TenWHmJ\nPcPMA/doGKDrmwpbDJYMHAyNbSgSbcUeXnBmQ9WH3plKsml6B/b7eFGM4cIMirV4\nmIMLnLT9AgMBAAECggEANjDX0ehSpXSi8h8ZA9l/ym8tXtdIQ86467C6GyodoHdY\nazz7sGTyuW6QS0rsd2WpfC0trOJA1c0OyW+Y0nYyjkJvuVBAxZP5TgMtcUoFMYQu\nF9N0+pLPbMl1UfCTZp/9X5OxCePrOGLkiFr1xAS+Cw1OQm78YxoRkMnFNWN1KPeT\nETzCkdrD9Bt/aGA7QpiIWyqRAJQwguf73mUxPezy8gUBfHZlrjh6J7SraA/atoxp\nBQghGOztxq18HyxWUkv8SWlHXwybsfaHYbhNjvXtjZYCkhXW2XHPXF8FCW4AflpR\nx5gEM5j9VntbLNZEBlNgfTR2h2GUxCQTIS89K9qQxwKBgQDS+ytsX/E9LNTJyuGQ\nJ/bF/LgE1WlKrMdx7YMQlDRdegWa744lwe2GQHfcprUvtTA2rO287lB+OJ2LvfFA\nHUS//rgzCy4kDq3GQ5krzxS/TUB+xOQORuA6wZdbj+WF3pPmIombFiExLRm90HCk\nSMUsTwXs4yPN0frfLRgaM+WWswKBgQDF+rQ8uc/WrjESFtxNKfDNNZt7rZYXvtbY\n4zZyJVOp6YOg5X7UEReDLAqiPXKBohj3BhYOhaAmMSZKaNyrygwcZxNLXvVrbxmg\nt0D/JHDBu/LGy4gEYn67+kvwVjPvnExsab99NWZene3R2Ug8FFFZLVmfE6x8pmz2\nQ8ImgifdjwKBgFUOZ2own7vu9/ZGcXtBcU5OXQ2tz94IG/wFKeKkLRxGVj4pN6Bn\nN0/5a5ksKD2MiVxxiQKy/QZ14qX0tG8Jna7djPsfFcH5nPsiQ30S5iVdipPQ4rQS\nxNFLPK7wKzM2EWAlKl64pDcEHK2We+LvZ3Y+gYAH7mZKsh4JOv9NTtDbAoGAE10k\nB9R8uZisAALwZTO287tMi9o8lfH6fZgrmRqBhlrqnvATaZaKYDAMkjXEX12FZ5PW\n0HDNay7feeOrwbmvWY/TWUneYzWoogmKd+oOhURmyH7bvOINV0Fx7/3eco8tAmWN\nbyer7ZEw05eW8xlho4FGBMMd2ctFWQjjknSkhY0CgYBDmCMYN/oaZRQVsbe9H/j7\nQenxe2HnwIJ4rg25EPR2zk9jcZfuG3ZqroR6/nozj+AFIGRvmihYg0dT4ZYsNNP2\ngJIpSrDgIKSyAH0lr7Kxr2rDA1QoZBbV7EdpdaNqGwgZD9srSPN2G3gY+gttuGvI\nTl6L6xnr+LUsgNxRNgAoaQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "amiami-service@amiami-387915.iam.gserviceaccount.com",
+  "client_id": "112160676679632451865",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/amiami-service%40amiami-387915.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
