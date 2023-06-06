@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public interface VideoService {
 
-    ResponseEntity<String> uploadVideo(MultipartFile videoFile, AmiAmiUser user, List<Tag> tags);
+    ResponseEntity<String> uploadVideo(MultipartFile videoFile, AmiAmiUser userzz, List<Tag> tags);
 
     ResponseEntity<AmiAmiVideo> getVideoById(Long videoId);
 

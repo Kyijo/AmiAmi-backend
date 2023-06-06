@@ -15,5 +15,5 @@ public interface TagService {
 
     ResponseEntity<List<Tag>> getAllTags();
 
-    ResponseEntity<Tag> getTagByName(Tag tag);
+    ResponseEntity<Tag> getTagByName(String tagz);
 }

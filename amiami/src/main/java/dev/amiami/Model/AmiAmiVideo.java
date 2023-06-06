@@ -1,5 +1,7 @@
 package dev.amiami.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,11 +25,12 @@ public class AmiAmiVideo {
         @Column(unique = true)
         private String url;
 
-        @ManyToMany
-    @JoinTable(name = "video_tag",
-            joinColumns = @JoinColumn(name = "video_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    private List<Tag> tags = new ArrayList<>();
+        @JsonManagedReference
+        @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+        @JoinTable(name = "video_tag",
+                joinColumns = @JoinColumn(name = "video_id"),
+                inverseJoinColumns = @JoinColumn(name = "tag_id"))
+        private List<Tag> tags = new ArrayList<>();
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "user_id")

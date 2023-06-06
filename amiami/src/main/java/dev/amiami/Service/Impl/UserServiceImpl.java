@@ -76,7 +76,11 @@ public class UserServiceImpl implements dev.amiami.Service.UserService {
 
     @Override
     public Optional<ResponseEntity<AmiAmiUser>> getUserById(Long userId) {
-        return Optional.of(ResponseEntity.of(userRepository.findById(userId)));
+Optional<AmiAmiUser> userOptional = userRepository.findById(userId);
+        if (userOptional.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ResponseEntity.ok(userOptional.get()));
     }
 
     @Override

@@ -1,9 +1,7 @@
 package dev.amiami.Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Tag {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,9 +22,11 @@ public class Tag {
 
     private String backgroundImage;
 
-    @ManyToMany(mappedBy = "tags")
+    @JsonBackReference
+    @ManyToMany(mappedBy = "tags", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AmiAmiImage> images = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "tags")
+    @JsonBackReference
+    @ManyToMany(mappedBy = "tags", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AmiAmiVideo> videos = new ArrayList<>();
 }

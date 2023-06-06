@@ -72,9 +72,13 @@ public class UserController {
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteUser(@RequestParam Long id) {
-        userService.deleteUserById(id);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        Optional<ResponseEntity<AmiAmiUser>> user = userService.getUserById(id);
+        if(user.isEmpty()) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+         userService.deleteUserById(id);
         return new ResponseEntity<>("User deleted", HttpStatus.OK);
     }
 
@@ -98,7 +102,7 @@ public class UserController {
 
     @GetMapping("/getAllUsers")
     public ResponseEntity<List<AmiAmiUser>> getAllUsers() {
-        List<AmiAmiUser> users = userService.getAllUsers().getBody();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        return ResponseEntity.ok((List<AmiAmiUser>) userService.getAllUsers().getBody());
+
     }
 }

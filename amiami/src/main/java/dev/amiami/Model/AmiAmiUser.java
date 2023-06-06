@@ -1,5 +1,7 @@
 package dev.amiami.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dev.amiami.Roles.Role;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,45 +15,47 @@ import java.util.*;
 @Setter
 @EqualsAndHashCode
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class AmiAmiUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(unique = true)
     private String username;
+
     @Column(unique = true)
     private String email;
+
+    @JsonIgnore
     @Column
     private String password;
+
     @Column
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user"
-            , cascade = CascadeType.ALL
-            , fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AmiAmiImage> images = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user"
-            , cascade = CascadeType.ALL
-            , fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AmiAmiVideo> videos = new ArrayList<>();
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        for(Role role : Role.values()) {
-            authorities.add(new SimpleGrantedAuthority(role.name()));
-        }
+            authorities.add(new SimpleGrantedAuthority(Role.USER.name()));
         return authorities;
     }
 
-    public void addRole(Role role){
+    public void addRole(Role role) {
         roles.add(role);
     }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -71,7 +75,6 @@ public class AmiAmiUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
     public String toString() {
         return "AmiAmiUser(id=" + this.getId()
                 + ", username=" + this.getUsername()

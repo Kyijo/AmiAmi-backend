@@ -21,7 +21,7 @@ public class TagServiceImpl implements dev.amiami.Service.TagService {
         if(tag.getName() != null && tag.getName().isEmpty()) {
             throw new RuntimeException("Tag name is required");
         }
-        if(tagRepository.findByName(tag.getName()).isPresent()) {
+        if(tagRepository.findByName(tag.getName()) != null) {
             throw new RuntimeException("Tag already exists");
         }
         tagRepository.save(tag);
@@ -42,7 +42,13 @@ public class TagServiceImpl implements dev.amiami.Service.TagService {
     }
 
     @Override
-    public ResponseEntity<Tag> getTagByName(Tag tag) {
-       return ResponseEntity.ok(tagRepository.findByName(tag.getName()).orElseThrow(() -> new RuntimeException("Tag not found")));
+    public ResponseEntity<Tag> getTagByName(String tag) {
+       if(tag == null || tag.isEmpty()) {
+           throw new RuntimeException("Tag name is required");
+       }
+       if(tagRepository.findByName(tag) == null) {
+           throw new RuntimeException("Tag does not exist");
+       }
+       return ResponseEntity.ok(tagRepository.findByName(tag));
     }
 }

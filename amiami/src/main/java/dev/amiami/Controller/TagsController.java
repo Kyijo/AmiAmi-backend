@@ -41,6 +41,6 @@ public class TagsController {
     public ResponseEntity<String> getTagByName(String name) {
         Tag tag = new Tag();
         tag.setName(name);
-        return ResponseEntity.ok(tagService.getTagByName(tag).toString());
+        return ResponseEntity.ok(tagService.getTagByName(String.valueOf(tag)).getBody().getName());
     }
 }

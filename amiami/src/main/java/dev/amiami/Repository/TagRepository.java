@@ -14,9 +14,5 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface TagRepository extends JpaRepository<Tag, Long> {
 
-    Optional<Tag> findByName(String name);
-
-    List<Tag> findByImagesIn(List<AmiAmiImage> images);
-
-    List<Tag> findByVideosIn(List<AmiAmiVideo> videos);
+    Tag findByName(String name);
 }
