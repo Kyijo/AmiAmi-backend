@@ -457,9 +457,6 @@ paths:
           description: 404 message -> Not Found
         '500':
           description: 500 message -> Internal Server Error
-      security:
-        - Bearer Token:
-            - global
   "/api/user/register":
     post:
       tags:
@@ -503,9 +500,6 @@ paths:
           description: 404 message -> Not Found
         '500':
           description: 500 message -> Internal Server Error
-      security:
-        - Bearer Token:
-            - global
 securityDefinitions:
   Bearer Token:
     type: apiKey
