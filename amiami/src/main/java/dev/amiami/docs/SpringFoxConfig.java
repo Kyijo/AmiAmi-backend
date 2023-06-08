@@ -65,6 +65,97 @@ public class SpringFoxConfig {
                                 )
                         )
                 )
+                .globalResponses(
+                        HttpMethod.POST, new ArrayList<>(
+                                Arrays.asList(
+                                        new ResponseBuilder()
+                                                .code("500")
+                                                .description("500 message -> Internal Server Error")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("403")
+                                                .description("403 message -> Forbidden")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("404")
+                                                .description("404 message -> Not Found")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("400")
+                                                .description("400 message -> Bad Request")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("401")
+                                                .description("401 message -> Unauthorized / Expired JWT token")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("201")
+                                                .description("201 message -> Created")
+                                                .build()
+                                )
+                        )
+                )
+                .globalResponses(
+                        HttpMethod.DELETE, new ArrayList<>(
+                                Arrays.asList(
+                                        new ResponseBuilder()
+                                                .code("500")
+                                                .description("500 message -> Internal Server Error")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("403")
+                                                .description("403 message -> Forbidden")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("404")
+                                                .description("404 message -> Not Found")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("400")
+                                                .description("400 message -> Bad Request")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("401")
+                                                .description("401 message -> Unauthorized / Expired JWT token")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("204")
+                                                .description("204 message -> No Content")
+                                                .build()
+                                )
+                        )
+                )
+                .globalResponses(
+                        HttpMethod.PUT, new ArrayList<>(
+                                Arrays.asList(
+                                        new ResponseBuilder()
+                                                .code("500")
+                                                .description("500 message -> Internal Server Error")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("403")
+                                                .description("403 message -> Forbidden")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("404")
+                                                .description("404 message -> Not Found")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("400")
+                                                .description("400 message -> Bad Request")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("401")
+                                                .description("401 message -> Unauthorized / Expired JWT token")
+                                                .build(),
+                                        new ResponseBuilder()
+                                                .code("200")
+                                                .description("200 message -> OK")
+                                                .build()
+                                )
+                        )
+                )
+
                 .apiInfo(apiInfo());
     }
 
