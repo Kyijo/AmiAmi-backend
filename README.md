@@ -29,9 +29,11 @@ If you want to access the documentation, you can either go to
    </ul>
   <li>Redocly</li>
    <ul>
-    [Redocly documentation](https://amiami-docs.redoc.ly/)
+     <li>https://amiami-docs.redoc.ly/</li>
    </ul>
 </ul>
+
+> NOTE: If you use docker container, the default port is 1234. If you decide to change that port, please provide your own port.
 
 ## Project Structure
 
