@@ -4,7 +4,6 @@ import dev.amiami.DTO.ImageDTO;
 import dev.amiami.Model.AmiAmiImage;
 import dev.amiami.Model.AmiAmiUser;
 import dev.amiami.Model.Tag;
-import dev.amiami.Repository.TagRepository;
 import dev.amiami.Repository.UserRepository;
 import dev.amiami.Service.ImageService;
 import dev.amiami.Service.TagService;

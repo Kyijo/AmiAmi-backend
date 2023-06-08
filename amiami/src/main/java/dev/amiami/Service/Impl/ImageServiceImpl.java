@@ -37,7 +37,7 @@ public class ImageServiceImpl implements dev.amiami.Service.ImageService {
         byte[] imageBytes = Base64.getDecoder().decode(base64Image);
 
         // Specify the destination image path
-        String destinationImage = "images/" + System.nanoTime() + nameOfImage + ".jpg";
+        String destinationImage = "images/" + UUID.randomUUID() + ".jpg";
 
         // Create a ByteArrayInputStream from the image bytes
         ByteArrayInputStream imageInputStream = new ByteArrayInputStream(imageBytes);
