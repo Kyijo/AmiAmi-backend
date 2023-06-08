@@ -4,7 +4,7 @@ AmiAmi Backend is a server-side application for the AmiAmi project, which serves
 
 # AmiAmi Frontend
 
-[AmiAmi Frontend](https://github.com/Kyijo/amiami-frotend)
+[AmiAmi Frontend](https://github.com/Kyijo/amiami-frontend)
 
 ## Prerequisites
 
