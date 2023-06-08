@@ -25,11 +25,11 @@ If you want to access the documentation, you can either go to
 <ul>
   <li> LocalHost</li>
    <ul>
-    <li>`http://localhost:{port}/swagger-ui/</li>
+    <li>http://localhost:{port}/swagger-ui/</li>
    </ul>
   <li>Redocly</li>
    <ul>
-    <li>[Redocly documentation](https://amiami-docs.redoc.ly/)</li>
+    [Redocly documentation](https://amiami-docs.redoc.ly/)
    </ul>
 </ul>
 
