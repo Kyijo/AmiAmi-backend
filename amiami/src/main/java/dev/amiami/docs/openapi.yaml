@@ -1,0 +1,769 @@
+---
+swagger: '2.0'
+info:
+  description: This API is still in development, however you can use it to upload
+    images and get them back.It stores images in a database and GCS and allows you
+    to get them back by their id.
+  version: 1.0.0
+  title: AmiAmi API
+  termsOfService: This API is free to use for anyone
+  contact:
+    name: Kyijo
+    email: kyijouwu@gmail.com
+  license:
+    name: API License
+host: localhost:1234
+basePath: "/"
+tags:
+  - name: basic-error-controller
+    description: Basic Error Controller
+  - name: image-controller
+    description: Image Controller
+  - name: tags-controller
+    description: Tags Controller
+  - name: user-controller
+    description: User Controller
+paths:
+  "/api/image/getAllImages":
+    get:
+      tags:
+        - image-controller
+      summary: getAllImages
+      operationId: getAllImagesUsingGET
+      produces:
+        - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/AmiAmiImage"
+        '400':
+          description: 400 message -> Bad Request
+        '401':
+          description: 401 message -> Unauthorized / Expired JWT token
+        '403':
+          description: 403 message -> Forbidden
+        '404':
+          description: 404 message -> Not Found
+        '500':
+          description: 500 message -> Internal Server Error
+      security:
+        - Bearer Token:
+            - global
+  "/api/image/getImageById/{imageId}":
+    get:
+      tags:
+        - image-controller
+      summary: getImageById
+      operationId: getImageByIdUsingGET
+      produces:
+        - "*/*"
+      parameters:
+        - name: imageId
+          in: path
+          description: imageId
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '400':
+          description: 400 message -> Bad Request
+        '401':
+          description: 401 message -> Unauthorized / Expired JWT token
+        '403':
+          description: 403 message -> Forbidden
+        '404':
+          description: 404 message -> Not Found
+        '500':
+          description: 500 message -> Internal Server Error
+      security:
+        - Bearer Token:
+            - global
+  "/api/image/getImagesByUser/{username}":
+    get:
+      tags:
+        - image-controller
+      summary: getImagesByUser
+      operationId: getImagesByUserUsingGET
+      produces:
+        - "*/*"
+      parameters:
+        - name: username
+          in: path
+          description: username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/AmiAmiImage"
+        '400':
+          description: 400 message -> Bad Request
+        '401':
+          description: 401 message -> Unauthorized / Expired JWT token
+        '403':
+          description: 403 message -> Forbidden
+        '404':
+          description: 404 message -> Not Found
+        '500':
+          description: 500 message -> Internal Server Error
+      security:
+        - Bearer Token:
+            - global
+  "/api/image/upload":
+    post:
+      tags:
+        - image-controller
+      summary: handleFileUpload
+      operationId: handleFileUploadUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - "*/*"
+      parameters:
+        - in: body
+          name: image
+          description: image
+          required: true
+          schema:
+            "$ref": "#/definitions/ImageDTO"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+      security:
+        - Bearer Token:
+            - global
+  "/api/tag/addTag":
+    post:
+      tags:
+        - tags-controller
+      summary: addTag
+      operationId: addTagUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - "*/*"
+      parameters:
+        - name: name
+          in: query
+          description: name
+          required: false
+          type: string
+        - name: urlForImage
+          in: query
+          description: urlForImage
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Tag"
+      security:
+        - Bearer Token:
+            - global
+  "/api/tag/deleteTag":
+    post:
+      tags:
+        - tags-controller
+      summary: deleteTag
+      operationId: deleteTagUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - "*/*"
+      parameters:
+        - name: name
+          in: query
+          description: name
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Tag"
+      security:
+        - Bearer Token:
+            - global
+  "/api/tag/getAllTags":
+    get:
+      tags:
+        - tags-controller
+      summary: getAllTags
+      operationId: getAllTagsUsingGET
+      produces:
+        - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Tag"
+        '400':
+          description: 400 message -> Bad Request
+        '401':
+          description: 401 message -> Unauthorized / Expired JWT token
+        '403':
+          description: 403 message -> Forbidden
+        '404':
+          description: 404 message -> Not Found
+        '500':
+          description: 500 message -> Internal Server Error
+      security:
+        - Bearer Token:
+            - global
+  "/api/tag/getTagByName":
+    get:
+      tags:
+        - tags-controller
+      summary: getTagByName
+      operationId: getTagByNameUsingGET
+      produces:
+        - "*/*"
+      parameters:
+        - name: name
+          in: query
+          description: name
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '400':
+          description: 400 message -> Bad Request
+        '401':
+          description: 401 message -> Unauthorized / Expired JWT token
+        '403':
+          description: 403 message -> Forbidden
+        '404':
+          description: 404 message -> Not Found
+        '500':
+          description: 500 message -> Internal Server Error
+      security:
+        - Bearer Token:
+            - global
+  "/api/user/delete/{id}":
+    delete:
+      tags:
+        - user-controller
+      summary: deleteUser
+      operationId: deleteUserUsingDELETE
+      produces:
+        - "*/*"
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+      security:
+        - Bearer Token:
+            - global
+  "/api/user/get/{id}":
+    get:
+      tags:
+        - user-controller
+      summary: getUserById
+      operationId: getUserByIdUsingGET
+      produces:
+        - "*/*"
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/AmiAmiUser"
+        '400':
+          description: 400 message -> Bad Request
+        '401':
+          description: 401 message -> Unauthorized / Expired JWT token
+        '403':
+          description: 403 message -> Forbidden
+        '404':
+          description: 404 message -> Not Found
+        '500':
+          description: 500 message -> Internal Server Error
+      security:
+        - Bearer Token:
+            - global
+  "/api/user/getAllUsers":
+    get:
+      tags:
+        - user-controller
+      summary: getAllUsers
+      operationId: getAllUsersUsingGET
+      produces:
+        - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/AmiAmiUser"
+        '400':
+          description: 400 message -> Bad Request
+        '401':
+          description: 401 message -> Unauthorized / Expired JWT token
+        '403':
+          description: 403 message -> Forbidden
+        '404':
+          description: 404 message -> Not Found
+        '500':
+          description: 500 message -> Internal Server Error
+      security:
+        - Bearer Token:
+            - global
+  "/api/user/getByUsername/{username}":
+    get:
+      tags:
+        - user-controller
+      summary: getUserByUsername
+      operationId: getUserByUsernameUsingGET
+      produces:
+        - "*/*"
+      parameters:
+        - name: username
+          in: path
+          description: username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/AmiAmiUser"
+        '400':
+          description: 400 message -> Bad Request
+        '401':
+          description: 401 message -> Unauthorized / Expired JWT token
+        '403':
+          description: 403 message -> Forbidden
+        '404':
+          description: 404 message -> Not Found
+        '500':
+          description: 500 message -> Internal Server Error
+      security:
+        - Bearer Token:
+            - global
+  "/api/user/login":
+    post:
+      tags:
+        - user-controller
+      summary: login
+      operationId: loginUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - "*/*"
+      parameters:
+        - name: password
+          in: query
+          description: password
+          required: false
+          type: string
+        - name: username
+          in: query
+          description: username
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+      security:
+        - Bearer Token:
+            - global
+  "/api/user/register":
+    post:
+      tags:
+        - user-controller
+      summary: register
+      operationId: registerUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - "*/*"
+      parameters:
+        - name: email
+          in: query
+          description: email
+          required: false
+          type: string
+        - name: password
+          in: query
+          description: password
+          required: false
+          type: string
+        - name: username
+          in: query
+          description: username
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+      security:
+        - Bearer Token:
+            - global
+  "/error":
+    get:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingGET
+      produces:
+        - text/html
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ModelAndView"
+        '400':
+          description: 400 message -> Bad Request
+        '401':
+          description: 401 message -> Unauthorized / Expired JWT token
+        '403':
+          description: 403 message -> Forbidden
+        '404':
+          description: 404 message -> Not Found
+        '500':
+          description: 500 message -> Internal Server Error
+      security:
+        - Bearer Token:
+            - global
+    head:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingHEAD
+      consumes:
+        - application/json
+      produces:
+        - text/html
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ModelAndView"
+      security:
+        - Bearer Token:
+            - global
+    post:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - text/html
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ModelAndView"
+      security:
+        - Bearer Token:
+            - global
+    put:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - text/html
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ModelAndView"
+      security:
+        - Bearer Token:
+            - global
+    delete:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingDELETE
+      produces:
+        - text/html
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ModelAndView"
+      security:
+        - Bearer Token:
+            - global
+    options:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingOPTIONS
+      consumes:
+        - application/json
+      produces:
+        - text/html
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ModelAndView"
+      security:
+        - Bearer Token:
+            - global
+    patch:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingPATCH
+      consumes:
+        - application/json
+      produces:
+        - text/html
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ModelAndView"
+      security:
+        - Bearer Token:
+            - global
+securityDefinitions:
+  Bearer Token:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  AmiAmiImage:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      tags:
+        type: array
+        items:
+          "$ref": "#/definitions/Tag"
+      url:
+        type: string
+      user:
+        "$ref": "#/definitions/AmiAmiUser"
+    title: AmiAmiImage
+  AmiAmiUser:
+    type: object
+    properties:
+      accountNonExpired:
+        type: boolean
+      accountNonLocked:
+        type: boolean
+      authorities:
+        type: array
+        items:
+          "$ref": "#/definitions/GrantedAuthority"
+      credentialsNonExpired:
+        type: boolean
+      email:
+        type: string
+      enabled:
+        type: boolean
+      id:
+        type: integer
+        format: int64
+      roles:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+          enum:
+            - ADMIN
+            - USER
+      username:
+        type: string
+    title: AmiAmiUser
+  AmiAmiVideo:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      tags:
+        type: array
+        items:
+          "$ref": "#/definitions/Tag"
+      url:
+        type: string
+      user:
+        "$ref": "#/definitions/AmiAmiUser"
+    title: AmiAmiVideo
+  GrantedAuthority:
+    type: object
+    properties:
+      authority:
+        type: string
+    title: GrantedAuthority
+  ImageDTO:
+    type: object
+    properties:
+      file:
+        type: string
+      name:
+        type: string
+      tags:
+        type: array
+        items:
+          type: string
+      username:
+        type: string
+    title: ImageDTO
+  ModelAndView:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      model:
+        type: object
+      modelMap:
+        type: object
+        additionalProperties:
+          type: object
+      reference:
+        type: boolean
+      status:
+        type: string
+        enum:
+          - ACCEPTED
+          - ALREADY_REPORTED
+          - BAD_GATEWAY
+          - BAD_REQUEST
+          - BANDWIDTH_LIMIT_EXCEEDED
+          - CHECKPOINT
+          - CONFLICT
+          - CONTINUE
+          - CREATED
+          - DESTINATION_LOCKED
+          - EXPECTATION_FAILED
+          - FAILED_DEPENDENCY
+          - FORBIDDEN
+          - FOUND
+          - GATEWAY_TIMEOUT
+          - GONE
+          - HTTP_VERSION_NOT_SUPPORTED
+          - IM_USED
+          - INSUFFICIENT_SPACE_ON_RESOURCE
+          - INSUFFICIENT_STORAGE
+          - INTERNAL_SERVER_ERROR
+          - I_AM_A_TEAPOT
+          - LENGTH_REQUIRED
+          - LOCKED
+          - LOOP_DETECTED
+          - METHOD_FAILURE
+          - METHOD_NOT_ALLOWED
+          - MOVED_PERMANENTLY
+          - MOVED_TEMPORARILY
+          - MULTIPLE_CHOICES
+          - MULTI_STATUS
+          - NETWORK_AUTHENTICATION_REQUIRED
+          - NON_AUTHORITATIVE_INFORMATION
+          - NOT_ACCEPTABLE
+          - NOT_EXTENDED
+          - NOT_FOUND
+          - NOT_IMPLEMENTED
+          - NOT_MODIFIED
+          - NO_CONTENT
+          - OK
+          - PARTIAL_CONTENT
+          - PAYLOAD_TOO_LARGE
+          - PAYMENT_REQUIRED
+          - PERMANENT_REDIRECT
+          - PRECONDITION_FAILED
+          - PRECONDITION_REQUIRED
+          - PROCESSING
+          - PROXY_AUTHENTICATION_REQUIRED
+          - REQUESTED_RANGE_NOT_SATISFIABLE
+          - REQUEST_ENTITY_TOO_LARGE
+          - REQUEST_HEADER_FIELDS_TOO_LARGE
+          - REQUEST_TIMEOUT
+          - REQUEST_URI_TOO_LONG
+          - RESET_CONTENT
+          - SEE_OTHER
+          - SERVICE_UNAVAILABLE
+          - SWITCHING_PROTOCOLS
+          - TEMPORARY_REDIRECT
+          - TOO_EARLY
+          - TOO_MANY_REQUESTS
+          - UNAUTHORIZED
+          - UNAVAILABLE_FOR_LEGAL_REASONS
+          - UNPROCESSABLE_ENTITY
+          - UNSUPPORTED_MEDIA_TYPE
+          - UPGRADE_REQUIRED
+          - URI_TOO_LONG
+          - USE_PROXY
+          - VARIANT_ALSO_NEGOTIATES
+      view:
+        "$ref": "#/definitions/View"
+      viewName:
+        type: string
+    title: ModelAndView
+  Tag:
+    type: object
+    properties:
+      backgroundImage:
+        type: string
+      id:
+        type: integer
+        format: int64
+      images:
+        type: array
+        items:
+          "$ref": "#/definitions/AmiAmiImage"
+      name:
+        type: string
+      videos:
+        type: array
+        items:
+          "$ref": "#/definitions/AmiAmiVideo"
+    title: Tag
+  View:
+    type: object
+    properties:
+      contentType:
+        type: string
+    title: View
