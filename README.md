@@ -19,10 +19,26 @@ The AmiAmi Backend provides the following features:
 - Tagging images
 - User profile
 
+## Documentation
+
+If you want to access the documentation, you can either go to 
+<ul>
+  <li> LocalHost</li>
+   <ul>
+    <li>http://localhost:{port}/swagger-ui/</li>
+   </ul>
+  <li>Redocly</li>
+   <ul>
+     <li>https://amiami-docs.redoc.ly/</li>
+   </ul>
+</ul>
+
+> NOTE: If you use docker container, the default port is 1234. If you decide to change that port, please provide your own port.
+
 ## Project Structure
 
 The project follows a standard Spring Boot structure with the following main packages:
-
+ 
 - `dev.amiami`: Contains the main application class and configuration files.
 - `dev.amiami.Controller`: Includes REST controllers for handling incoming HTTP requests and defining the API endpoints.
 - `dev.amiami.Service`: Provides service classes for the business logic implementation.
@@ -52,3 +68,4 @@ What would I like to implement in the future?
 - Like and dislike service
 - Share videos
 - Use DTO instead of models for responses
+- Filter images 
