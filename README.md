@@ -85,3 +85,4 @@ What would I like to implement in the future?
 - Share videos
 - Use DTO instead of models for responses
 - Filter images 
+- At the moment im saving images to GCS, want to change it to AWS later
