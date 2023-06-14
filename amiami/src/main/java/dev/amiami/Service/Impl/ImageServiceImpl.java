@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.ByteArrayInputStream;
@@ -28,23 +29,32 @@ public class ImageServiceImpl implements dev.amiami.Service.ImageService {
     }
 
     @Override
-    public ResponseEntity<String> uploadImage(String base64Image, AmiAmiUser user, String nameOfImage, List<Tag> tags) throws IOException {
-        if (base64Image.isEmpty()) {
-            throw new CustomException("Please provide a valid Base64 encoded image");
+    public ResponseEntity<String> uploadImage(MultipartFile file, AmiAmiUser user, String nameOfImage, List<Tag> tags) throws IOException {
+        if (file.isEmpty()) {
+            throw new CustomException("File is empty");
         }
 
-        // Decode Base64 string
-        byte[] imageBytes = Base64.getDecoder().decode(base64Image);
+        // Determine the content type based on the file extension
+        String contentType;
+        String fileExtension = file.getOriginalFilename().split("\\.")[1].toLowerCase();
+        if (fileExtension.equals("jpg") || fileExtension.equals("jpeg")) {
+            contentType = "image/jpeg";
+        } else if (fileExtension.equals("png")) {
+            contentType = "image/png";
+        } else {
+            // Handle unsupported file types
+            throw new CustomException("Unsupported file type");
+        }
 
         // Specify the destination image path
-        String destinationImage = "images/" + UUID.randomUUID() + ".jpg";
+        String destinationImage = "images/" + UUID.randomUUID() + "." + fileExtension;
 
         // Create a ByteArrayInputStream from the image bytes
-        ByteArrayInputStream imageInputStream = new ByteArrayInputStream(imageBytes);
+        ByteArrayInputStream imageInputStream = new ByteArrayInputStream(file.getBytes());
 
         BlobInfo blobInfo = storage.create(
                 BlobInfo.newBuilder(BUCKET_NAME, destinationImage)
-                        .setContentType("image/jpeg")
+                        .setContentType(contentType)
                         .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER))))
                         .build(),
                 imageInputStream);
@@ -65,6 +75,7 @@ public class ImageServiceImpl implements dev.amiami.Service.ImageService {
 
         return ResponseEntity.ok("Image uploaded successfully.");
     }
+
 
     @Override
     public ResponseEntity<AmiAmiImage> getImageById(Long imageId) {

@@ -30,16 +30,17 @@ public class ImageController {
     @Autowired
     private TagService tagService;
 
+    @CrossOrigin
     @PostMapping("/upload")
-    public ResponseEntity<String> handleFileUpload(@RequestBody ImageDTO image) throws IOException {
-        AmiAmiUser user = userRepository.findByUsername(image.getUsername()).get();
+    public ResponseEntity<String> handleFileUpload(@ModelAttribute ImageDTO image) throws IOException {
+        AmiAmiUser user = userRepository.findByUsername(image.getName()).get();
         List<Tag> tags = new ArrayList<>();
         for (String tagName : image.getTags()) {
          if(tagService.getTagByName(tagName).getBody() != null) {
              tags.add(tagService.getTagByName(tagName).getBody());
          }
         }
-        return imageService.uploadImage(image.getFile(), user, image.getName(), tags);
+        return imageService.uploadImage(image.getImage(), user, image.getNameOfImage(), tags);
     }
 
     @GetMapping("/getImageById/{imageId}")

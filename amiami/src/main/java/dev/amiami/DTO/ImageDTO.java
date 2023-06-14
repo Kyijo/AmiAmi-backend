@@ -2,14 +2,15 @@ package dev.amiami.DTO;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @Getter
 @Setter
 public class ImageDTO {
-    private String file;
+    private MultipartFile image;
+    private String nameOfImage;
     private String name;
-    private String username;
     private List<String> tags;
 }
