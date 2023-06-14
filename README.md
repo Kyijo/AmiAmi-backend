@@ -2,6 +2,10 @@
 
 AmiAmi Backend is a server-side application for the AmiAmi project, which serves as an image and video sharing platform. This repository contains the backend codebase responsible for managing images, videos, users, and tags.
 
+# AmiAmi Frontend
+
+[AmiAmi Frontend](https://github.com/Kyijo/amiami-frontend)
+
 ## Prerequisites
 
 Before running the AmiAmi Backend, ensure that the following prerequisites are met:
@@ -60,6 +64,18 @@ The AmiAmi Backend is built using the following technologies and frameworks:
 - Docker
 - Maven
 
+## How to setup
+
+First, clone this repo
+> git clone https://github.com/Kyijo/AmiAmi-backend.git
+
+Next setup the docker via
+> navigate terminal to resources, 
+> docker-compose build
+> docker-compose up
+
+Download Maven dependencies
+
 ## Future features
 
 What would I like to implement in the future?
@@ -69,3 +85,4 @@ What would I like to implement in the future?
 - Share videos
 - Use DTO instead of models for responses
 - Filter images 
+- At the moment im saving images to GCS, want to change it to AWS later
