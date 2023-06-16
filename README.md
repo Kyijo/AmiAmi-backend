@@ -13,6 +13,7 @@ Before running the AmiAmi Backend, ensure that the following prerequisites are m
 - Java Development Kit (JDK) 11 or higher
 - Apache Maven
 - Docker
+- You might need to setup GCS credentials (they are in properties)
 
 ## Features
 
